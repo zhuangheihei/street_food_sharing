@@ -1,0 +1,29 @@
+<% include ../partials/header %> 
+
+     <header class="jumbotron">
+         <div class="container">
+             <h1><span class="glyphicon glyphicon-cutlery"></span> Welcome To Food Street!</h1>
+             <p>View the most popular street food from all over the world</p>
+             <p>
+                <a class="btn btn-primary btn-lg" href="/streetfoods/new">Add New Street Food</a>
+             </p>
+         </div>
+     </header>
+     
+     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% streetfoods.forEach(function(streetfood){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                   <img src="<%= streetfood.image %>">
+                   <div class="caption">
+                       <h4><%= streetfood.name %></h4>
+                   </div>
+                   <p>
+                       <a href="/streetfoods/<%= streetfood._id %>" class="btn btn-primary">More Info</a>
+                   </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+<% include ../partials/footer %>
