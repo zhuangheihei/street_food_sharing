@@ -18,8 +18,9 @@ var commentRoutes    = require("./routes/comments"),
     streetfoodRoutes = require("./routes/streetfoods"),
     indexRoutes      = require("./routes/index")
     
-// mongoose.connect("mongodb://localhost/street_food"); //we should use different database for development and production
-mongoose.connect("mongodb://zhuanghong:Jsmj123456-@ds245287.mlab.com:45287/streetfood");
+mongoose.connect(process.env.DATABASEURL); //we should use different database for development and production
+// mongoose.connect("mongodb://zhuanghong:Jsmj123456-@ds245287.mlab.com:45287/streetfood");
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -54,6 +55,8 @@ app.use("/", indexRoutes);
 app.use("/streetfoods", streetfoodRoutes);
 app.use("/streetfoods/:id/comments", commentRoutes);
 
+// process.env.PORT means the environment where this code being run
+// so process.env.PORT on cloud 9 maybe different from that in Heroku
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The YelpCamp Server Has Started!");
 });
