@@ -18,7 +18,8 @@ var commentRoutes    = require("./routes/comments"),
     streetfoodRoutes = require("./routes/streetfoods"),
     indexRoutes      = require("./routes/index")
     
-mongoose.connect("mongodb://localhost/street_food");
+// mongoose.connect("mongodb://localhost/street_food"); //we should use different database for development and production
+mongoose.connect("mongodb://zhuanghong:Jsmj123456-@ds245287.mlab.com:45287/streetfood");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
