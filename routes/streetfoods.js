@@ -11,13 +11,14 @@ router.get("/", function(req, res){
        if(err){
            console.log(err);
        } else {
-           request('https://maps.googleapis.com/maps/api/geocode/json?address=sardine%20lake%20ca&key=AIzaSyBtHyZ049G_pjzIXDKsJJB5zMohfN67llM', function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(body); // Show the HTML for the Modulus homepage.
-                res.render("streetfoods/index",{streetfoods:allStreetfoods});
-
-            }
-});
+        //   request('https://maps.googleapis.com/maps/api/geocode/json?address=sardine%20lake%20ca&key=AIzaSyBtHyZ049G_pjzIXDKsJJB5zMohfN67llM', function (error, response, body) {
+        //     if (!error && response.statusCode == 200) {
+        //         console.log(body); // Show the HTML for the Modulus homepage.
+        //         res.render("streetfoods/index",{streetfoods:allStreetfoods});
+        //     }
+        // });
+        // console.log(allStreetfoods);
+        res.render("streetfoods/index",{streetfoods:allStreetfoods});
        }
     });
 });
@@ -59,7 +60,7 @@ router.get("/:id", function(req, res){
         if(err){
             console.log(err);
         } else {
-            //console.log(foundStreetfood)
+            console.log(foundStreetfood)
             //render show template with that streetfood
             res.render("streetfoods/show", {streetfood: foundStreetfood});
         }
