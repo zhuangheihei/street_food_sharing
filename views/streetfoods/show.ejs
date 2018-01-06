@@ -29,12 +29,13 @@
                     <a class="btn btn-success" href="/streetfoods/<%= streetfood._id %>/comments/new">Add New Comment</a>
                 </div>
                 <hr>
+                
+                <!--显示所有的评论-->
                 <% streetfood.comments.forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-md-12">
                             <strong><%= comment.author.username %></strong>
                             <span class="pull-right">10 days ago</span>
-                        <!--显示所有的评论-->
                            <div>
                                <%= comment.text %> 
     
