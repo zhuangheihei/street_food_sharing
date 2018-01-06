@@ -8,10 +8,14 @@ module.exports = {
         req.flash("error", "You must be signed in to do that!");
         res.redirect("/login");
     },
+    
     checkUserStreetfood: function(req, res, next){
         if(req.isAuthenticated()){
             Streetfood.findById(req.params.id, function(err, streetfood){
-               if(streetfood.author.id.equals(req.user._id)){
+                if(err){
+                    console.log(err);
+                }
+               else if(streetfood.author.id.equals(req.user._id)){
                    next();
                } else {
                    req.flash("error", "You don't have permission to do that!");
@@ -28,7 +32,10 @@ module.exports = {
         //console.log("YOU MADE IT!");
         if(req.isAuthenticated()){
             Comment.findById(req.params.commentId, function(err, comment){
-               if(comment.author.id.equals(req.user._id)){
+                if(err) {
+                    console. log(err);
+                }
+               else if(comment.author.id.equals(req.user._id)){
                    next();
                } else {
                    req.flash("error", "You don't have permission to do that!");
