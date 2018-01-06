@@ -20,8 +20,8 @@ var commentRoutes    = require("./routes/comments"),
 
 //we should use different database for development and production
 // Use this to prevent username and password of database from being seen.
-// var url = process.env.DATABASEURL; 
-var url = "mongodb://localhost/street_food";
+ var url = process.env.DATABASEURL; 
+//var url = "mongodb://localhost/street_food";
 mongoose.connect(url); 
 
 app.use(bodyParser.urlencoded({extended: true}));
