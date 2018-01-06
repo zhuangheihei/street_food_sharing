@@ -34,9 +34,11 @@ router.post("/",middleware.isLoggedIn,function(req, res){
                comment.author.username = req.user.username;
                //save comment
                comment.save();
+               //save comment to nested streetfood
                streetfood.comments.push(comment);
                streetfood.save();
                console.log(comment);
+               console.log(streetfood);
                req.flash('success', 'Created a comment!');
                res.redirect('/streetfoods/' + streetfood._id);
            }
@@ -66,14 +68,37 @@ router.put("/:commentId", function(req, res){
    }); 
 });
 
+//Original delete method does not apply here.
+// router.delete("/:commentId",middleware.checkUserComment, function(req, res){
+//     Comment.findByIdAndRemove(req.params.commentId, function(err){
+//         if(err){
+//             console.log("PROBLEM!");
+//         } else {
+//             res.redirect("/streetfoods/" + req.params.id);
+//         }
+//     })
+// });
+
 router.delete("/:commentId",middleware.checkUserComment, function(req, res){
-    Comment.findByIdAndRemove(req.params.commentId, function(err){
+    Streetfood.findById(req.params.id, function(err, streetfood) {
         if(err){
-            console.log("PROBLEM!");
-        } else {
-            res.redirect("/streetfoods/" + req.params.id);
+            console.log(err);
+            res.redirect("/streetfoods");
         }
-    })
+        else {
+            Comment.findByIdAndRemove(req.params.commentId, function(err){
+                if(err){
+                    console.log(err);
+                } else {
+                    streetfood.comments.id(req.params.commentId).remove();
+                    streetfood.save();
+                    req.flash('success', 'Created a comment!');
+                    res.redirect('/streetfoods/' + streetfood._id);  
+                }
+            });
+        }
+    });
 });
+
 
 module.exports = router;
