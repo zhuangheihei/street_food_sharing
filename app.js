@@ -17,9 +17,11 @@ var express     = require("express"),
 var commentRoutes    = require("./routes/comments"),
     streetfoodRoutes = require("./routes/streetfoods"),
     indexRoutes      = require("./routes/index")
-    
-mongoose.connect(process.env.DATABASEURL); //we should use different database for development and production
-// mongoose.connect("mongodb://zhuanghong:Jsmj123456-@ds245287.mlab.com:45287/streetfood");
+
+//we should use different database for development and production
+// Use this to prevent username and password of database from being seen.
+var url = process.env.DATABASEURL || "mongod://localhost/streetfood";
+mongoose.connect(url); 
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
