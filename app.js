@@ -16,11 +16,12 @@ var express     = require("express"),
 //requiring routes
 var commentRoutes    = require("./routes/comments"),
     streetfoodRoutes = require("./routes/streetfoods"),
-    indexRoutes      = require("./routes/index")
+    indexRoutes      = require("./routes/index");
 
 //we should use different database for development and production
 // Use this to prevent username and password of database from being seen.
-var url = process.env.DATABASEURL || "mongod://localhost/streetfood";
+// var url = process.env.DATABASEURL; 
+var url = "mongodb://localhost/street_food";
 mongoose.connect(url); 
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -28,8 +29,8 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'));
 app.use(cookieParser('secret'));
+seedDB();
 
-//seedDB(); 
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -60,5 +61,5 @@ app.use("/streetfoods/:id/comments", commentRoutes);
 // process.env.PORT means the environment where this code being run
 // so process.env.PORT on cloud 9 maybe different from that in Heroku
 app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("The YelpCamp Server Has Started!");
+   console.log("The StreetFood Server Has Started!");
 });
