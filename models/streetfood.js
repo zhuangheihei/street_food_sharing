@@ -1,4 +1,6 @@
 var mongoose = require("mongoose");
+var CommentSchema = require("./comment.js").schema; //require mongodb schema
+
 
 var streetfoodSchema = new mongoose.Schema({
    name: String,
@@ -11,12 +13,15 @@ var streetfoodSchema = new mongoose.Schema({
       },
       username: String
    },
-   comments: [
-      {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: "Comment"
-      }
-   ]
+   //Original comments array saves the array of comment's id
+   // comments: [   // comments is a array of comment's id
+   //    {
+   //       type: mongoose.Schema.Types.ObjectId,
+   //       ref: "Comment"
+   //    }
+   // ]
+   // use this to save multiple comments!
+   comments:[CommentSchema] 
 });
 
 module.exports = mongoose.model("Streetfood", streetfoodSchema);
