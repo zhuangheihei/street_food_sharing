@@ -6,6 +6,7 @@
 * Issue: can not delete embedded comment from Streetfood schema
     * Modified comment/delete router
     * Not only delete comment in database's Comment collection, but also delete the comment embedded in streetfood. 
+* Issue: Edit can not apply to both comment and embedded comment
 
 * Todo:
     * Add streetfood creating time
