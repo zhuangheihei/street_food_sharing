@@ -39,7 +39,7 @@ router.post("/",middleware.isLoggedIn,function(req, res){
                streetfood.save();
                console.log(comment);
                console.log(streetfood);
-               req.flash('success', 'Created a comment!');
+               req.flash('success', 'Comment created!');
                res.redirect('/streetfoods/' + streetfood._id);
            }
         });
@@ -58,15 +58,38 @@ router.get("/:commentId/edit", middleware.isLoggedIn, function(req, res){
     })
 });
 
+//Modified update edited comment
 router.put("/:commentId", function(req, res){
-   Comment.findByIdAndUpdate(req.params.commentId, req.body.comment, function(err, comment){
-       if(err){
-           res.render("edit");
-       } else {
-           res.redirect("/streetfoods/" + req.params.id);
-       }
-   }); 
+    // find streetfood by id
+    Streetfood.findById(req.params.id, function(err, streetfood){
+        if(err){
+            console.log(err);
+        } else {
+             Comment.findByIdAndUpdate(req.params.commentId, req.body.comment, function(err,comment){
+                 if(err){
+                     res.render("edit");
+                 } else {
+                     streetfood.comments.id(req.params.commentId).text = req.body.comment.text;
+                     streetfood.save();
+                     req.flash('success', 'Comment updated!');
+                     res.redirect('/streetfoods/' + req.params.id);
+                 }
+             });
+        }
+    });
 });
+
+//Original update edited comment
+// router.put("/:commentId", function(req, res){
+//   Comment.findByIdAndUpdate(req.params.commentId, req.body.comment, function(err, comment){
+//       if(err){
+//           res.render("edit");
+//       } else {
+//           res.redirect("/streetfoods/" + req.params.id);
+//       }
+//   }); 
+// });
+
 
 //Original delete method does not apply here.
 // router.delete("/:commentId",middleware.checkUserComment, function(req, res){
@@ -92,7 +115,7 @@ router.delete("/:commentId",middleware.checkUserComment, function(req, res){
                 } else {
                     streetfood.comments.id(req.params.commentId).remove();
                     streetfood.save();
-                    req.flash('success', 'Deleted a comment!');
+                    req.flash('success', 'Comment deleted!');
                     res.redirect('/streetfoods/' + streetfood._id);  
                 }
             });
