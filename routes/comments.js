@@ -92,7 +92,7 @@ router.delete("/:commentId",middleware.checkUserComment, function(req, res){
                 } else {
                     streetfood.comments.id(req.params.commentId).remove();
                     streetfood.save();
-                    req.flash('success', 'Created a comment!');
+                    req.flash('success', 'Deleted a comment!');
                     res.redirect('/streetfoods/' + streetfood._id);  
                 }
             });
