@@ -21,7 +21,7 @@ var commentRoutes    = require("./routes/comments"),
 //we should use different database for development and production
 // Use this to prevent username and password of database from being seen.
  var url = process.env.DATABASEURL; 
-//var url = "mongodb://localhost/street_food";
+// var url = "mongodb://localhost/street_food";
 mongoose.connect(url); 
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -29,7 +29,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'));
 app.use(cookieParser('secret'));
-// seedDB();
+seedDB();
 
 
 // PASSPORT CONFIGURATION
