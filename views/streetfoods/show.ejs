@@ -7,21 +7,27 @@
                 <!--<li class="list-group-item">Page 2</li>-->
                 <!--<li class="list-group-item">Page 3</li>-->
             </div>
+             <div>
+                    <a class="btn btn-default" href="/streetfoods/">Go Back</a>
+            </div>
         </div>
         <div class="col-md-9">
             <div class="thumbnail">
                 <img class="img-responsive" src="<%= streetfood.image %>">
                 <div class="caption-full">
-                    <h4 class="pull-right">$</h4>
+                    <!--<h4 class="pull-right">$</h4>-->
                     <h4><a><%=streetfood.name%></a></h4>
-                    <p><%= streetfood.description %></p>
-                    <p>
-                        <em>Submitted By <%= streetfood.author.username %></em>
-                    </p>
-                    <!--若当前登入用户即为作者，那么可以编辑-->
-                    <% if(currentUser && streetfood.author.id.equals(currentUser._id)){ %>
-                        <a class="btn btn-warning" href="/streetfoods/<%= streetfood._id %>/edit">Edit Streetfood</a>
-                    <% } %>
+                    
+                        <p><%= streetfood.description %></p>
+                        <p>
+                            <em>Submitted By <%= streetfood.author.username %> on <%= streetfood.date %></em>
+                            <span class = "pull-right">
+                                <!--若当前登入用户即为作者，那么可以编辑-->
+                                <% if(currentUser && streetfood.author.id.equals(currentUser._id)){ %>
+                                    <a class="btn btn-warning" href="/streetfoods/<%= streetfood._id %>/edit">Edit Streetfood</a>
+                                <% } %>
+                            </span>
+                        </p>
                 </div>
             </div>
             <div class="well">
@@ -29,16 +35,15 @@
                     <a class="btn btn-success" href="/streetfoods/<%= streetfood._id %>/comments/new">Add New Comment</a>
                 </div>
                 <hr>
-                
                 <!--显示所有的评论-->
                 <% streetfood.comments.forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-md-12">
                             <strong><%= comment.author.username %></strong>
-                            <span class="pull-right">10 days ago</span>
+                            <!--<span class="pull-right">10 days ago</span>-->
+                            <span class="pull-right"><%= comment.date %></span>
                            <div>
                                <%= comment.text %> 
-    
                                 <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                                     <form style="display: inline" class="pull-right" action="/streetfoods/<%=streetfood._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
                                         <button class="btn btn-xs btn-danger">DELETE</button>
