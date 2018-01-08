@@ -33,7 +33,8 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         id: req.user._id,
         username: req.user.username
     }
-    var newStreetfood = {name: name, image: image, description: desc, author:author}
+    var curDate = new Date().toLocaleString();
+    var newStreetfood = {name: name, image: image, description: desc, author:author, date:curDate};
     // Create a new streetfood and save to DB
     Streetfood.create(newStreetfood, function(err, newlyCreated){
         if(err){
