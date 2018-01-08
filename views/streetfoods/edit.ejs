@@ -17,6 +17,9 @@
                 </div>
             </form>
             <a href="/streetfoods/<%=streetfood._id%>">Go Back</a>
+            <form style="display: inline"  action="/streetfoods/<%=streetfood._id%>?_method=DELETE" method="POST">
+                <button class="btn btn-danger pull-right" >Delete</button>
+            </form>
         </div>
     </div>
 <% include ../partials/footer %>
