@@ -7,8 +7,11 @@
     * Modified comment/delete router
     * Not only delete comment in database's Comment collection, but also delete the comment embedded in streetfood. 
 * Issue: Edit can not apply to both comment and embedded comment
+    * Now edit can apply to all comment and embedded comment.
 
 * Todo:
-    * Add streetfood creating time
-    * Add comment creating time
+    * Add streetfood creating time - completed
+    * Add comment creating time - completed
+    * Add streetfood delete feature - completed
+    * Add styling to jumbotron on index page
     * Add google map api
