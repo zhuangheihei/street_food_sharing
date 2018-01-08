@@ -21,13 +21,13 @@
                         <p><%= streetfood.description %></p>
                         <p>
                             <em>Submitted By <%= streetfood.author.username %> on <%= streetfood.date %></em>
-                            <span class = "pull-right">
-                                <!--若当前登入用户即为作者，那么可以编辑-->
-                                <% if(currentUser && streetfood.author.id.equals(currentUser._id)){ %>
-                                    <a class="btn btn-warning" href="/streetfoods/<%= streetfood._id %>/edit">Edit Streetfood</a>
-                                <% } %>
-                            </span>
                         </p>
+                        <!--若当前登入用户即为作者，那么可以编辑-->
+                        <% if(currentUser && streetfood.author.id.equals(currentUser._id)){ %>
+                            <div class="text-right">
+                                <a  class="btn btn-warning" href="/streetfoods/<%= streetfood._id %>/edit">Edit Streetfood</a>
+                            </div>
+                        <% } %>
                 </div>
             </div>
             <div class="well">
