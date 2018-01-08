@@ -68,6 +68,7 @@ router.get("/:id", function(req, res){
     });
 });
 
+//EDIT - edit the streetfood
 router.get("/:id/edit", middleware.checkUserStreetfood, function(req, res){
     console.log("IN EDIT!");
     //find the streetfood with provided ID
@@ -81,6 +82,7 @@ router.get("/:id/edit", middleware.checkUserStreetfood, function(req, res){
     });
 });
 
+//Put the updated streetfood back
 router.put("/:id", function(req, res){
     var newData = {name: req.body.name, image: req.body.image, description: req.body.desc};
     Streetfood.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, streetfood){
@@ -94,15 +96,18 @@ router.put("/:id", function(req, res){
     });
 });
 
-
-//middleware
-// function isLoggedIn(req, res, next){
-//     if(req.isAuthenticated()){
-//         return next();
-//     }
-//     req.flash("error", "You must be signed in to do that!");
-//     res.redirect("/login");
-// }
+//Delete the streetfood
+router.delete( "/:id", function(req, res){
+    //Mongoose to remove streetfood
+    Streetfood.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/streetfoods");
+        } else {
+            req.flash("success", "Streetfood deleted!")
+            res.redirect("/streetfoods");
+        }
+    });
+});
 
 module.exports = router;
 
