@@ -13,6 +13,7 @@ var streetfoodSchema = new mongoose.Schema({
       },
       username: String
    },
+   date: String,
    //Original comments array saves the array of comment's id
    // comments: [   // comments is a array of comment's id
    //    {
