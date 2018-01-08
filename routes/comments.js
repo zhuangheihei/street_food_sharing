@@ -32,6 +32,9 @@ router.post("/",middleware.isLoggedIn,function(req, res){
                //add username and id to comment
                comment.author.id = req.user._id;
                comment.author.username = req.user.username;
+               var currentdate = new Date(); 
+               var datetime =  new Date().toLocaleString();
+               comment.date = datetime;
                //save comment
                comment.save();
                //save comment to nested streetfood
