@@ -13,3 +13,7 @@
 #delete-form {
     display: inline;
 }
+
+.jumbotron {
+    background-color:transparent !important; 
+}
